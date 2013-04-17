@@ -1,7 +1,7 @@
-dropdown
+DropDown
 ========
 
-Markdown blog engine in Dropbox
+Markdown blog engine for Dropbox/Rails
 
 Potential Implementation
 ========================
