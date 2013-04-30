@@ -1,5 +1,8 @@
+Gemfile.lock
 *.gem
 *.rbc
+.DS_Store
+.yardoc/
 .bundle
 .config
 coverage
