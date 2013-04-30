@@ -87,6 +87,14 @@ title: Deep Throat Exposed! author: Bob Woodward post: 19740404T.... slug: deep-
 
 ## Configuration
 
-Uses Dropbox api to access folder specified in an environment variable.
-Dropbox foleder contains a folder for posts written in markdown. Rake task for generation of html
-that creates a folder within the public directory in Rails and places each html unique html file in there.
+```ruby
+  DropDown.configure do |c|
+    c.base_path: 'blog_posts'
+    c.source_directory: 'markdown'
+    c.destination_directory: 'html'
+    c.template: 'honeysuckle'
+    c.dropbox_app_key: '<insert dropbox app key>'
+    c.dropbox_app_secret: '<insert dropbox app secret key>'
+  end
+```
+
