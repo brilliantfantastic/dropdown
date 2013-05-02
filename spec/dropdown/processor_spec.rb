@@ -43,6 +43,12 @@ describe Dropdown::Processor do
       end
     end
 
+    describe '.markdown_iterator' do
+      it 'defaults to a file iterator' do
+        subject.markdown_iterator.should be_a Dropdown::Iterators::FileIterator
+      end
+    end
+
     context 'updating an existing markdown file' do
     end
   end

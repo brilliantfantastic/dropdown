@@ -1,10 +1,22 @@
+require_relative 'iterators/file_iterator'
+
 module Dropdown
   class Processor
-    attr_accessor :markdown_iterator,
-                  :output_store,
+    attr_accessor :output_store,
                   :renderer
 
     def initialize
+    end
+
+    def markdown_iterator=(value)
+      @iterator = value
+    end
+
+    def markdown_iterator
+      if @iterator.nil?
+        @iterator = Iterators::FileIterator.new
+      end
+      @iterator
     end
 
     def process
