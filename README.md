@@ -27,18 +27,18 @@ A rake task will be used to process a directory with Markdown files. The process
 
 ```ruby
   # task to process the Markdown directory
-  require 'dropdown/processing'
+  require 'dropdown/processor'
 
   task :process [:source, :destination] do |t, args|
-    DropDown::Processing.process(args.source, args.destination)
+    DropDown::Processor.new(args.source, args.destination).process
   end
 ```
 
 Additional functionality
 
 ```ruby
-  DropDown::Processing.process(:all)  # same as calling DropDown::Processing.process
-  DropDown::Processing.process        # uses the source and destination directories specified in the configuration
+  DropDown::Processor.new.process(:all)   # same as calling DropDown::Processor.new.process
+  DropDown::Processor.new.process         # uses the source and destination directories specified in the configuration
 ```
 
 ### Format of the generated output
