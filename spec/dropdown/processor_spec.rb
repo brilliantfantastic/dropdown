@@ -44,7 +44,9 @@ describe Dropdown::Processor do
     end
 
     describe '.markdown_iterator' do
+      let(:source) { double(:sub => '') }
       it 'defaults to a file iterator' do
+        subject.source = source
         subject.markdown_iterator.should be_a Dropdown::Iterators::FileIterator
       end
     end
