@@ -3,6 +3,7 @@ DropDown
 
 [![Code Climate](https://codeclimate.com/github/brilliantfantastic/dropdown.png)](https://codeclimate.com/github/brilliantfantastic/dropdown)
 [![Build Status](https://travis-ci.org/brilliantfantastic/dropdown.png?branch=master)](https://travis-ci.org/brilliantfantastic/dropdown)
+[![Coverage Status](https://coveralls.io/repos/brilliantfantastic/dropdown/badge.png?branch=master)](https://coveralls.io/r/brilliantfantastic/dropdown?branch=master)
 
 Blog engine that parses Markdown files stored in Dropbox for a static blog engine.
 
