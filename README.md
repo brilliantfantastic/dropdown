@@ -1,6 +1,8 @@
 DropDown
 ========
 
+[![Code Climate](https://codeclimate.com/github/brilliantfantastic/dropdown.png)](https://codeclimate.com/github/brilliantfantastic/dropdown)
+
 Blog engine that parses Markdown files stored in Dropbox for a static blog engine.
 
 Potential Implementation
