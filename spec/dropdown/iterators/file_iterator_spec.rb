@@ -1,5 +1,6 @@
 require 'tempfile'
 require 'pathname'
+require_relative '../../spec_helper'
 require_relative '../../../lib/dropdown/iterators/file_iterator'
 
 describe Dropdown::Iterators::FileIterator do
