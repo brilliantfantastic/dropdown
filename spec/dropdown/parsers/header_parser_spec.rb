@@ -57,7 +57,7 @@ describe Dropdown::Parsers::HeaderParser do
 
     subject { Dropdown::Parsers::HeaderParser.new(file) }
 
-    it 'reads in all lines before the first empty line' do
+    it 'creates a header variable for each line prior to first empty line' do
       subject.parse_headers
       subject.headers.should == {
         title: 'Deep Throat Exposed!',
