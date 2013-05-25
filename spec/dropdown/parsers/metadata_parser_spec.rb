@@ -9,10 +9,6 @@ describe Dropdown::Parsers::MetadataParser do
     context 'raising errors' do
       it 'requires a file' do
         expect {
-          Dropdown::Parsers::MetadataParser.new
-        }.to raise_error ArgumentError
-
-        expect {
           Dropdown::Parsers::MetadataParser.new(nil)
         }.to raise_error ArgumentError
       end
