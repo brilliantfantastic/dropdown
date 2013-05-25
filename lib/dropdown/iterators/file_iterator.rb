@@ -1,3 +1,5 @@
+require_relative '../constants'
+
 module Dropdown
   module Iterators
     class FileIterator
@@ -7,7 +9,7 @@ module Dropdown
       end
 
       def each
-        Dir.glob("#{@source}/**/*.{md,markdown}") do |markdown_file|
+        Dir.glob("#{@source}/**/*{#{Dropdown::EXTENSIONS.join(',')}}") do |markdown_file|
           yield markdown_file
         end
       end
