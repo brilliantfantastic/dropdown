@@ -1,17 +1,16 @@
 require_relative '../errors'
+require_relative '../constants'
 
 module Dropdown
   module Parsers
 
     class MetadataParser
 
-      EXTENSIONS = %w(.md .markdown)
-
       attr_accessor :file, :headers
 
       def initialize(file)
         raise ArgumentError if file.nil?
-        raise Dropdown::FileTypeError if !EXTENSIONS.include? File.extname(file)
+        raise Dropdown::FileTypeError if !Dropdown::EXTENSIONS.include? File.extname(file)
         @file = file
         @headers = {}
       end
