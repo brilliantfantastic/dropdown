@@ -1,19 +1,19 @@
 require 'tempfile'
 require 'pathname'
 require_relative '../../spec_helper'
-require_relative '../../../lib/dropdown/parsers/header_parser'
+require_relative '../../../lib/dropdown/parsers/metadata_parser'
 
-describe Dropdown::Parsers::HeaderParser do
+describe Dropdown::Parsers::MetadataParser do
   describe '.initialize' do
 
     context 'raising errors' do
       it 'requires a file' do
         expect {
-          Dropdown::Parsers::HeaderParser.new
+          Dropdown::Parsers::MetadataParser.new
         }.to raise_error ArgumentError
 
         expect {
-          Dropdown::Parsers::HeaderParser.new(nil)
+          Dropdown::Parsers::MetadataParser.new(nil)
         }.to raise_error ArgumentError
       end
 
@@ -21,13 +21,13 @@ describe Dropdown::Parsers::HeaderParser do
         file = Tempfile.new ['test', '.rtf']
 
         expect {
-          Dropdown::Parsers::HeaderParser.new(file)
+          Dropdown::Parsers::MetadataParser.new(file)
         }.to raise_error ArgumentError
 
         %w(.md .markdown).each do |ext|
           file = Tempfile.new ['test', ext]
           expect {
-            Dropdown::Parsers::HeaderParser.new(file)
+            Dropdown::Parsers::MetadataParser.new(file)
           }.to_not raise_error ArgumentError
         end
       end
@@ -36,7 +36,7 @@ describe Dropdown::Parsers::HeaderParser do
     context 'setting instance variables' do
       let(:file) { Tempfile.new ['text', '.md'] }
 
-      subject { Dropdown::Parsers::HeaderParser.new(file) }
+      subject { Dropdown::Parsers::MetadataParser.new(file) }
 
       it 'sets the file' do
         subject.file.should == file
@@ -55,7 +55,7 @@ describe Dropdown::Parsers::HeaderParser do
       File.new(file_path, 'r')
     }
 
-    subject { Dropdown::Parsers::HeaderParser.new(file) }
+    subject { Dropdown::Parsers::MetadataParser.new(file) }
 
     it 'creates a header variable for each line prior to first empty line' do
       subject.parse_headers

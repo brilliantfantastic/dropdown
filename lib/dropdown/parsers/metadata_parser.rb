@@ -1,7 +1,7 @@
 module Dropdown
   module Parsers
 
-    class HeaderParser
+    class MetadataParser
 
       EXTENSIONS = %w(.md .markdown)
 
