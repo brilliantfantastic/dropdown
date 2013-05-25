@@ -1,3 +1,5 @@
+require_relative '../errors'
+
 module Dropdown
   module Parsers
 
@@ -9,7 +11,7 @@ module Dropdown
 
       def initialize(file)
         raise ArgumentError if file.nil?
-        raise ArgumentError if !EXTENSIONS.include? File.extname(file)
+        raise Dropdown::FileTypeError if !EXTENSIONS.include? File.extname(file)
         @file = file
         @headers = {}
       end

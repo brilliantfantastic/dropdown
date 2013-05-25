@@ -18,13 +18,13 @@ describe Dropdown::Parsers::MetadataParser do
 
         expect {
           Dropdown::Parsers::MetadataParser.new(file)
-        }.to raise_error ArgumentError
+        }.to raise_error Dropdown::FileTypeError
 
         %w(.md .markdown).each do |ext|
           file = Tempfile.new ['test', ext]
           expect {
             Dropdown::Parsers::MetadataParser.new(file)
-          }.to_not raise_error ArgumentError
+          }.to_not raise_error Dropdown::FileTypeError
         end
       end
     end
