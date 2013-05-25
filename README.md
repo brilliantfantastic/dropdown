@@ -50,11 +50,9 @@ Additional functionality
 Each file will have meta data stored as comments in the MarkDown:
 
 ```
-##################################
-# Title: Deep Throat Exposed!
-# Author: Bob Woodward
-# Post: 4/4/1974
-##################################
+Title: Deep Throat Exposed!
+Author: Bob Woodward
+Post: 4/4/1974
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat molestie condimentum. Vestibulum malesuada, 
 lorem sit amet euismod pellentesque, tellus felis varius enim, id tincidunt leo odio aliquet ante. Maecenas metus 
