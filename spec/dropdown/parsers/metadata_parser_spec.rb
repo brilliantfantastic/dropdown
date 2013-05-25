@@ -44,7 +44,7 @@ describe Dropdown::Parsers::MetadataParser do
     end
   end
 
-  describe '#parse_headers' do
+  describe '#parse' do
     let(:file) {
       file_path = File.join(File.dirname(__FILE__),
                             '../../fixtures/sample_post.md')
@@ -54,7 +54,7 @@ describe Dropdown::Parsers::MetadataParser do
     subject { Dropdown::Parsers::MetadataParser.new(file) }
 
     it 'creates a header variable for each line prior to first empty line' do
-      subject.parse_headers
+      subject.parse
       subject.headers.should == {
         title: 'Deep Throat Exposed!',
         author: 'Bob Woodward',

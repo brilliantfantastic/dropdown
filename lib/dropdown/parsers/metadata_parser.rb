@@ -14,7 +14,7 @@ module Dropdown
         @headers = {}
       end
 
-      def parse_headers
+      def parse
         post = @file.readlines
         empty_line_index = post.find_index { |line| /^\s$/.match(line) }
         header_lines = post[0...empty_line_index]
