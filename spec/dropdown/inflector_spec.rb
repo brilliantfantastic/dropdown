@@ -6,8 +6,12 @@ describe Dropdown::Inflector do
       Dropdown::Inflector.new(:test).constant_name.should == 'Test'
     end
 
-    it 'should handle underscores' do
+    it 'handles underscores' do
       Dropdown::Inflector.new(:test_this).constant_name.should == 'TestThis'
+    end
+
+    it 'handles nil words' do
+      Dropdown::Inflector.new(nil).constant_name.should be_empty
     end
   end
 end
