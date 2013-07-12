@@ -1,18 +1,21 @@
+require_relative '../../lib/dropdown'
+
 describe 'Processing a directory of markdown files' do
   context 'in a local directory' do
 
-    let(:blog_directory) { } # Fixtured directory of md
-    let(:html_directory_path) { } # Path to ideal directory location
+    let(:blog_directory) { '../fixtures/blog' }
+    let(:html_directory_path) { File.join(blog_directory, 'html') }
 
     subject { Dropdown::Processor.new }
 
     it 'generates the html files for the markdown files' do
       subject.source = blog_directory
-      subject.markdown_iterator = Dropdown::Iterators::FileIterator.new
       subject.output_store = Dropdown::OutputStore.new(html_directory_path)
+      subject.renderer = :markdown_renderer
       subject.process
 
-      # Make sure that all the markdown files have accompianyied
+      html_files = Dir[File.join(html_directory_path, '**', '*')]
+      html_files.length.should be > 0
     end
 
   end
