@@ -2,15 +2,18 @@ require 'redcarpet'
 
 module Dropdown
   class MarkdownRenderer
-    def initialize
+    attr_reader :file
+
+    def initialize(file)
+      @file = file
       @markdown = Redcarpet::Markdown.new Redcarpet::Render::HTML
     end
 
-    def render(file)
+    def render
       @markdown.render File.read(file)
     end
 
-    def output_filename(file)
+    def output_filename
       File.basename(file, '.md') + '.html'
     end
   end
