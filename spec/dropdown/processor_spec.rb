@@ -27,7 +27,10 @@ describe Dropdown::Processor do
 
         subject.renderer = renderer
 
-        files.each { |file| renderer.should_receive(:render).with file }
+        files.each do |file|
+          renderer.should_receive(:render)
+          renderer.should_receive(:output_filename)
+        end
         subject.process
       end
 
