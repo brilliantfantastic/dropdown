@@ -6,9 +6,6 @@ module Dropdown
                   :output_store,
                   :renderer
 
-    def initialize
-    end
-
     def markdown_iterator=(value)
       @iterator = value
     end
@@ -22,7 +19,7 @@ module Dropdown
 
     def process
       markdown_iterator.each do |file|
-        output_store.save renderer.render file
+        output_store.save renderer.render, renderer.output_filename
       end
     end
   end
