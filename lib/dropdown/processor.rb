@@ -1,3 +1,4 @@
+require_relative 'renderer_factory'
 require_relative 'iterators/file_iterator'
 
 module Dropdown
