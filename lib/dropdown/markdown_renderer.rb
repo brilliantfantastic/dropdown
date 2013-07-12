@@ -9,5 +9,9 @@ module Dropdown
     def render(file)
       @markdown.render File.read(file)
     end
+
+    def output_filename(file)
+      File.basename(file, '.md') + '.html'
+    end
   end
 end
