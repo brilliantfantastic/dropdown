@@ -9,11 +9,20 @@ describe  Dropdown::OutputStore do
 
   describe '#save' do
     it 'create an output directory if it does not exist' do
-      subject.save html
+      subject.save html, 'stuff.html'
       Pathname.new(subject.path).should exist
     end
 
-    it 'names the output file the same as the input file'
-    it 'saves the html file in the directory'
+    it 'names the output file the same as the input file' do
+      subject.save html, 'bar.html'
+      output_file = File.join(output_path, 'bar.html')
+      File.exists? output_file
+    end
+
+    it 'writes the content to the file name' do
+      subject.save html, 'bar.html'
+      output_file = File.join(output_path, 'bar.html')
+      File.readlines(output_file)[0].should == html
+    end
   end
 end
