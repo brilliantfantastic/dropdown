@@ -4,7 +4,6 @@ require_relative '../../lib/dropdown'
 describe Dropdown::Processor do
   describe '.process' do
     let(:iterator) { double }
-    let(:renderer) { double }
     subject { Dropdown::Processor.new }
 
     it 'loops through each file in a source directory' do
@@ -16,30 +15,32 @@ describe Dropdown::Processor do
     end
 
     context 'with some files' do
+      class FakeRenderer
+        def initialize(file); end
+      end
+
       let(:files) { [double, double] }
       let(:store) { double }
 
-      it 'loops through each file and renders HTML' do
+      before do
         iterator.should_receive(:each).and_yield(files[0]).and_yield(files[1])
         subject.markdown_iterator = iterator
+        subject.renderer = :fake_renderer
+        FakeRenderer.any_instance.stub(:output_filename)
+      end
+
+      it 'loops through each file and renders HTML' do
         store.as_null_object
         subject.output_store = store
 
-        subject.renderer = renderer
-
-        files.each do |file|
-          renderer.should_receive(:render)
-          renderer.should_receive(:output_filename)
-        end
+        render_count = 0
+        FakeRenderer.any_instance.stub(:render) { render_count += 1 }
         subject.process
+        render_count.should == 2
       end
 
       it 'stores the rendered file' do
-        iterator.should_receive(:each).and_yield(files[0]).and_yield(files[1])
-        subject.markdown_iterator = iterator
-        renderer.as_null_object
-        subject.renderer = renderer
-
+        FakeRenderer.any_instance.stub(:render)
         subject.output_store = store
 
         store.should_receive(:save).exactly(files.count).times
@@ -53,9 +54,6 @@ describe Dropdown::Processor do
         subject.source = source
         subject.markdown_iterator.should be_a Dropdown::Iterators::FileIterator
       end
-    end
-
-    context 'updating an existing markdown file' do
     end
   end
 end
