@@ -7,6 +7,16 @@ module Dropdown
                   :renderer,
                   :output_store
 
+    class << self
+      def configuration
+        @configuration ||= Dropdown::Configuration.new
+      end
+    end
+
+    def initialize
+      @renderer = self.class.configuration.renderer
+    end
+
     def markdown_iterator=(value)
       @iterator = value
     end
