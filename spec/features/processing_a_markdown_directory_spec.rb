@@ -3,7 +3,8 @@ require_relative '../../lib/dropdown'
 describe 'Processing a directory of markdown files' do
   context 'in a local directory' do
 
-    let(:blog_directory) { '../fixtures/blog' }
+    let(:current_directory) { File.expand_path File.dirname(__FILE__) }
+    let(:blog_directory) { File.join current_directory, '../fixtures/blog' }
     let(:html_directory_path) { File.join(blog_directory, 'html') }
 
     subject { Dropdown::Processor.new }
