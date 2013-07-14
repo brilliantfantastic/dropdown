@@ -12,5 +12,8 @@ describe Dropdown::Blog do
     it 'is initialized to empty' do
       Dropdown::Blog.new.posts.should be_empty
     end
+
+    it 'creates a post for each file in the source' do
+    end
   end
 end
