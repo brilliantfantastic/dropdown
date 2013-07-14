@@ -8,6 +8,14 @@ describe Dropdown::Blog do
     blog.source.should == directory
   end
 
+  describe '#name' do
+    it 'can be set from an attribribute' do
+      blog = Dropdown::Blog.new
+      blog.name = 'Personal'
+      blog.name.should == 'Personal'
+    end
+  end
+
   describe '#posts' do
     let(:current_directory) { File.expand_path File.dirname(__FILE__) }
     let(:source_directory) { File.join current_directory, '../fixtures/processed' }

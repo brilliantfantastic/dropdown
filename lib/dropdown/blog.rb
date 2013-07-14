@@ -1,6 +1,6 @@
 module Dropdown
   class Blog
-    attr_accessor :source
+    attr_accessor :name, :source
     attr_reader :posts
 
     def initialize(source=nil)
