@@ -7,4 +7,10 @@ describe Dropdown::Blog do
     blog = Dropdown::Blog.new directory
     blog.source.should == directory
   end
+
+  describe '#posts' do
+    it 'is initialized to empty' do
+      Dropdown::Blog.new.posts.should be_empty
+    end
+  end
 end
