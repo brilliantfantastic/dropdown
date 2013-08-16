@@ -61,4 +61,22 @@ describe Dropdown::Parsers::MetadataParser do
       }
     end
   end
+
+  describe '#parse_xml' do
+    let(:file) {
+      file_path = File.join(File.dirname(__FILE__),
+                            '../../fixtures/processed/my-trip-to-africa.html')
+      File.new(file_path, 'r')
+    }
+
+    subject { Dropdown::Parsers::MetadataParser.new(file) }
+    it 'creates a header variable for each comment line prior to the body' do
+      subject.parse_xml
+      subject.headers.should == {
+        title: 'My trip to Africa',
+        author: 'Jane Goodall',
+        date: '4/4/1989'
+      }
+    end
+  end
 end
