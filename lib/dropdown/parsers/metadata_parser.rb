@@ -1,18 +1,15 @@
 require 'nokogiri'
-require_relative '../errors'
-require_relative '../constants'
 
 module Dropdown
   module Parsers
 
     class MetadataParser
+      include Parser
 
-      attr_accessor :file, :headers
+      attr_accessor :headers
 
       def initialize(file)
-        raise ArgumentError if file.nil?
-        raise Dropdown::FileTypeError if !Dropdown::HTML_EXTENSIONS.include? File.extname(file)
-        @file = file
+        super
         @headers = {}
       end
 
