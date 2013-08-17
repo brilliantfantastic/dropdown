@@ -14,6 +14,10 @@ module Dropdown
       Date.parse metadata[:date]
     end
 
+    def body
+      file.readlines.join
+    end
+
     def initialize(source)
       @source = source
     end
