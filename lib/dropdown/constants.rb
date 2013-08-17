@@ -1,3 +1,3 @@
 module Dropdown
-  EXTENSIONS = %w(.md .markdown)
+  MARKDOWN_EXTENSIONS = %w(.md .markdown)
 end

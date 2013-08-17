@@ -11,7 +11,7 @@ module Dropdown
 
       def initialize(file)
         raise ArgumentError if file.nil?
-        #raise Dropdown::FileTypeError if !Dropdown::EXTENSIONS.include? File.extname(file)
+        #raise Dropdown::FileTypeError if !Dropdown::MARKDOWN_EXTENSIONS.include? File.extname(file)
         @file = file
         @headers = {}
       end
