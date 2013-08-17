@@ -14,10 +14,16 @@ describe Dropdown::Post do
     let(:processed_file) { File.join current_directory, '../fixtures/processed/my-trip-to-africa.html' }
     subject { Dropdown::Post.new(processed_file) }
 
-    describe '#title' do
-      it 'returns the title from the html contents' do
-        subject.title.should == 'My trip to Africa'
-      end
+    it 'returns the title from the html contents' do
+      subject.title.should == 'My trip to Africa'
+    end
+
+    it 'returns the author from the html contents' do
+      subject.author.should == 'Jane Goodall'
+    end
+
+    it 'returns the date from the html contents' do
+      subject.date.should == Date.parse('4/4/1989')
     end
   end
 end

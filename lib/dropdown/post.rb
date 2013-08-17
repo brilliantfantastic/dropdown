@@ -6,6 +6,14 @@ module Dropdown
       metadata[:title]
     end
 
+    def author
+      metadata[:author]
+    end
+
+    def date
+      Date.parse metadata[:date]
+    end
+
     def initialize(source)
       @source = source
     end
