@@ -11,19 +11,12 @@ module Dropdown
 
       def initialize(file)
         raise ArgumentError if file.nil?
-        #raise Dropdown::FileTypeError if !Dropdown::MARKDOWN_EXTENSIONS.include? File.extname(file)
+        raise Dropdown::FileTypeError if !Dropdown::HTML_EXTENSIONS.include? File.extname(file)
         @file = file
         @headers = {}
       end
 
       def parse
-        post = @file.readlines
-        empty_line_index = post.find_index { |line| /^\s$/.match(line) }
-        header_lines = post[0...empty_line_index]
-        header_lines.each { |line| extract_header(line) }
-      end
-
-      def parse_xml
         doc = Nokogiri::HTML.parse(@file.readlines.join)
         doc.xpath('//comment()').each { |comment| extract_header(comment.content) }
       end

@@ -12,14 +12,14 @@ describe Dropdown::Parsers::MetadataParser do
         }.to raise_error ArgumentError
       end
 
-      it 'requires source file to be either .md or .markdown' do
+      it 'requires source file to be .html' do
         file = Tempfile.new ['test', '.rtf']
 
         expect {
           Dropdown::Parsers::MetadataParser.new(file)
         }.to raise_error Dropdown::FileTypeError
 
-        %w(.md .markdown).each do |ext|
+        %w(.html).each do |ext|
           file = Tempfile.new ['test', ext]
           expect {
             Dropdown::Parsers::MetadataParser.new(file)
@@ -29,7 +29,7 @@ describe Dropdown::Parsers::MetadataParser do
     end
 
     context 'setting instance variables' do
-      let(:file) { Tempfile.new ['text', '.md'] }
+      let(:file) { Tempfile.new ['text', '.html'] }
 
       subject { Dropdown::Parsers::MetadataParser.new(file) }
 
@@ -46,32 +46,13 @@ describe Dropdown::Parsers::MetadataParser do
   describe '#parse' do
     let(:file) {
       file_path = File.join(File.dirname(__FILE__),
-                            '../../fixtures/sample_post.md')
-      File.new(file_path, 'r')
-    }
-
-    subject { Dropdown::Parsers::MetadataParser.new(file) }
-
-    it 'creates a header variable for each line prior to first empty line' do
-      subject.parse
-      subject.headers.should == {
-        title: 'Deep Throat Exposed!',
-        author: 'Bob Woodward',
-        date: '4/4/1974'
-      }
-    end
-  end
-
-  describe '#parse_xml' do
-    let(:file) {
-      file_path = File.join(File.dirname(__FILE__),
                             '../../fixtures/processed/my-trip-to-africa.html')
       File.new(file_path, 'r')
     }
 
     subject { Dropdown::Parsers::MetadataParser.new(file) }
     it 'creates a header variable for each comment line prior to the body' do
-      subject.parse_xml
+      subject.parse
       subject.headers.should == {
         title: 'My trip to Africa',
         author: 'Jane Goodall',
