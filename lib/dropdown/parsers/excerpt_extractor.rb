@@ -7,7 +7,7 @@ module Dropdown
 
       def extract
         doc = Nokogiri::HTML.parse(@file.readlines.join)
-        doc.search('//text()').map(&:text).join
+        doc.search('//text()').map(&:text).join("\n")
       end
     end
   end

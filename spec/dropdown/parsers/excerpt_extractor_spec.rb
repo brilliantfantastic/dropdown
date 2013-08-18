@@ -20,5 +20,21 @@ describe Dropdown::Parsers::ExcerptExtractor do
       @file.should_receive(:readlines).and_return ['<p>Hello world</p>']
       subject.extract.should == 'Hello world'
     end
+
+    it 'extracts multiple lines' do
+      @file.should_receive(:readlines).and_return [
+        '<p>Hello world</p>',
+        '<div>I hope the world is fine</div>'
+      ]
+      subject.extract.should == "Hello world\nI hope the world is fine"
+    end
+
+    it 'ignores comments' do
+      @file.should_receive(:readlines).and_return [
+        '<!-- This should be ignored -->',
+        '<p>Hello world</p>'
+      ]
+      subject.extract.should == 'Hello world'
+    end
   end
 end
