@@ -15,5 +15,10 @@ describe Dropdown::Parsers::ExcerptExtractor do
       @file.should_receive(:readlines).and_return ['Hello world']
       subject.extract.should == 'Hello world'
     end
+
+    it 'extracts only the html content' do
+      @file.should_receive(:readlines).and_return ['<p>Hello world</p>']
+      subject.extract.should == 'Hello world'
+    end
   end
 end
