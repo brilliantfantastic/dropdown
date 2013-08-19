@@ -37,12 +37,12 @@ describe Dropdown::Parsers::ExcerptExtractor do
       subject.extract.should == 'Hello world'
     end
 
-    it 'joins with a space for non block elements' do
+    it 'joins with a blank for non block elements' do
       @file.should_receive(:readlines).and_return [
         '<p>Hello <strong>world</strong></p>',
         '<div>I hope the world is fine</div>'
       ]
-      subject.extract.should == "Hello world \nI hope the world is fine"
+      subject.extract.should == "Hello world\nI hope the world is fine"
     end
 
     it 'ignores elements that are not html' do

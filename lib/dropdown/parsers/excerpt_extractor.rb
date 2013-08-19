@@ -20,7 +20,7 @@ module Dropdown
         else
           unless element.description.nil?
             # save the seperator for later
-            seperator = element.description.block? ? "\n" : " "
+            seperator = element.description.block? ? "\n" : ""
           end
         end
 
