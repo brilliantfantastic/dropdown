@@ -16,7 +16,7 @@ module Dropdown
 
       def process_element(element)
         if element.text?
-          @results << element.text
+          @results << element.text.chomp
         else
           unless element.description.nil?
             # save the seperator for later

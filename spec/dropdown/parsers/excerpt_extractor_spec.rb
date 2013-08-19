@@ -44,5 +44,14 @@ describe Dropdown::Parsers::ExcerptExtractor do
       ]
       subject.extract.should == "Hello world \nI hope the world is fine"
     end
+
+    it 'ignores elements that are not html' do
+      @file.should_receive(:readlines).and_return [
+        '<p>Hello </p>',
+        "\n",
+        '<div>world</div>'
+      ]
+      subject.extract.should == "Hello \nworld"
+    end
   end
 end
