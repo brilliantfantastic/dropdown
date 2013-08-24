@@ -45,6 +45,7 @@ Getting Started with Dropbox storage
         ```
         DROPBOX_APP_KEY=<your app key>
         DROPBOX_APP_SECRET=<your app secret>
+        DROPBOX_ACCESS_TOKEN=<your access token>
         ```
 
     For production, if you application lives on Heroku, you can run the following:
@@ -52,6 +53,7 @@ Getting Started with Dropbox storage
     ```sh
     heroku config:set DROPBOX_APP_KEY=<your app key>
     heroku config:set DROPBOX_APP_SECRET=<your app secret>
+    heroku config:set DROPBOX_ACCESS_TOKEN=<your access token>
     ```
 
 1. **Update your Dropdown configuration**
@@ -60,13 +62,13 @@ Getting Started with Dropbox storage
 
     ```ruby
     Dropdown.configure do |c|
-      c.dropbox_app_key: ENV['DROPDOWN_APP_KEY']
-      c.dropdown_app_secret: ENV['DROPDOWN_APP_SECRET']
-      c.dropdown_access_token: ENV['DROPDOWN_ACCESS_TOKEN']
+      c.dropbox_app_key: ENV['DROPBOX_APP_KEY']
+      c.dropdown_app_secret: ENV['DROPBOX_APP_SECRET']
+      c.dropdown_access_token: ENV['DROPBOX_ACCESS_TOKEN']
     end
     ```
 
-    We will be retrieving the `DROPDOWN_ACCESS_TOKEN` with the next step.
+    We will be retrieving the `DROPBOX_ACCESS_TOKEN` with the next step.
 
 1. **Run `rake setup:dropbox:access_token`**
 
