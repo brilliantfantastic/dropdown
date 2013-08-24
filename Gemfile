@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rake'
+gem 'dotenv'
 gem 'coveralls', require: false
 
 gem 'redcarpet'
@@ -9,4 +10,5 @@ gem 'dropbox-sdk'
 
 group :development, :test do
   gem 'rspec'
+  gem 'webmock'
 end
