@@ -1,3 +1,5 @@
+require 'dotenv/tasks'
+
 task :default => [:test]
 
 desc 'Run tests for project'
@@ -14,4 +16,25 @@ task :process, :source_directory do |t, args|
   processor.output_store = Dropdown::OutputStore.new destination
   processor.renderer = :markdown_renderer
   processor.process
+end
+
+namespace :setup do
+  namespace :dropbox do
+    desc 'Store a new access token from Dropbox'
+    task :access_token => :dotenv do |t, args|
+      require 'launchy'
+      require_relative 'lib/dropdown'
+
+      key = args[:key] || ENV['DROPBOX_APP_KEY']
+      secret = args[:secret] || ENV['DROPBOX_APP_SECRET']
+      session = Dropdown::Dropbox::Session.new key, secret
+      url = session.authorize_url
+      puts "Opening the following url in your browser: #{url} ..."
+      Launchy.open url
+      puts "Paste the authorization code below and hit return: "
+      code = STDIN.gets.strip
+      token = session.access_token(code)
+      puts "Your access token is: #{token}"
+    end
+  end
 end
