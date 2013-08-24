@@ -66,15 +66,15 @@ Getting Started with Dropbox storage
     end
     ```
 
-    We will be storing the `DROPDOWN_ACCESS_TOKEN` with the next step.
+    We will be retrieving the `DROPDOWN_ACCESS_TOKEN` with the next step.
 
-1. **Run `rake setup:dropbox:store_access_token`**
+1. **Run `rake setup:dropbox:access_token`**
 
     This will instruct you to go to a Dropbox url to authorize your Dropbox application.
 
     Copy the authorization code and enter it the console.
 
-    Your access token is now stored in an environment variable: `ENV['DROPBOX_ACCESS_TOKEN']`.
+    Your access token will be displayed and you can copy it to an environment variable: `DROPBOX_ACCESS_TOKEN`.
 
 Potential Implementation
 ========================
