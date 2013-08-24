@@ -1,3 +1,4 @@
+require_relative 'dropdown/dropbox'
 require_relative 'dropdown/processor'
 require_relative 'dropdown/configuration'
 require_relative 'dropdown/output_store'
