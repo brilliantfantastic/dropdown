@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 require_relative '../../lib/dropdown'
 
 describe Dropdown::Processor do
-  describe '.process' do
+  describe '#process' do
     let(:iterator) { double }
     subject { Dropdown::Processor.new }
 
@@ -54,6 +54,15 @@ describe Dropdown::Processor do
         subject.source = source
         subject.markdown_iterator.should be_a Dropdown::Iterators::FileIterator
       end
+    end
+  end
+
+  describe 'defaults' do
+    let(:configuration) { Dropdown::Configuration.new }
+    subject { Dropdown::Processor.new }
+
+    it 'should initialize with the configuration defaults' do
+      subject.renderer.should == configuration.renderer
     end
   end
 end
