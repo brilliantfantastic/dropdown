@@ -9,7 +9,7 @@ module Dropdown
       end
 
       def each
-        Dir.glob("#{@source}/**/*{#{Dropdown::EXTENSIONS.join(',')}}") do |markdown_file|
+        Dir.glob("#{@source}/**/*{#{Dropdown::MARKDOWN_EXTENSIONS.join(',')}}") do |markdown_file|
           yield markdown_file
         end
       end

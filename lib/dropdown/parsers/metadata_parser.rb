@@ -1,25 +1,21 @@
-require_relative '../errors'
-require_relative '../constants'
+require 'nokogiri'
 
 module Dropdown
   module Parsers
 
     class MetadataParser
+      include Parser
 
-      attr_accessor :file, :headers
+      attr_accessor :headers
 
       def initialize(file)
-        raise ArgumentError if file.nil?
-        raise Dropdown::FileTypeError if !Dropdown::EXTENSIONS.include? File.extname(file)
-        @file = file
+        super
         @headers = {}
       end
 
       def parse
-        post = @file.readlines
-        empty_line_index = post.find_index { |line| /^\s$/.match(line) }
-        header_lines = post[0...empty_line_index]
-        header_lines.each { |line| extract_header(line) }
+        doc = Nokogiri::HTML.parse(@file.readlines.join)
+        doc.xpath('//comment()').each { |comment| extract_header(comment.content) }
       end
 
       private
