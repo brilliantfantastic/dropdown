@@ -57,7 +57,7 @@ describe Dropdown::Processor do
     end
   end
 
-  describe 'configuration' do
+  describe 'defaults' do
     let(:configuration) { Dropdown::Configuration.new }
     subject { Dropdown::Processor.new }
 
