@@ -1,1 +1,1 @@
-require_relative 'dropbox/access_token'
+require_relative 'dropbox/session'
