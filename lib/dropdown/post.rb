@@ -18,6 +18,14 @@ module Dropdown
       file.readlines.join
     end
 
+    def excerpt
+      unless @excerpt
+        extractor = Dropdown::Parsers::ExcerptExtractor.new(file)
+        @excerpt = extractor.extract
+      end
+      @excerpt
+    end
+
     def initialize(source)
       @source = source
     end

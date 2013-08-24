@@ -32,4 +32,11 @@ describe Dropdown::Post do
       subject.body.should == File.new(processed_file, 'r').readlines.join
     end
   end
+
+  describe '#excerpt' do
+    it 'returns the first 120 characters of the html content' do
+      results = "I had so much fun on my trip to Africa.\nHere is just a list of things that I have accomplished:\nRode on an elephant\nTouched a snake\nDid some shopping\nAte some great food\n\nIt was a really good time."
+      subject.excerpt.should == results
+    end
+  end
 end
