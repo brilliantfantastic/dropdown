@@ -1,4 +1,5 @@
 require 'dropbox_sdk'
+require_relative '../constants'
 
 module Dropdown
   module Iterators
@@ -12,7 +13,10 @@ module Dropdown
         contents = client.metadata(@source)['contents']
         contents.each do |child|
           unless child['is_dir']
-            yield child['path']
+            path = child['path']
+            if Dropdown::MARKDOWN_EXTENSIONS.include? File.extname(path)
+              yield path
+            end
           end
         end
       end
