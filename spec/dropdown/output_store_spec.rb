@@ -1,5 +1,6 @@
 require 'pathname'
 require 'tmpdir'
+require_relative '../spec_helper'
 require_relative '../../lib/dropdown/output_store'
 
 describe  Dropdown::OutputStore do

@@ -1,4 +1,5 @@
 require 'tempfile'
+require_relative '../spec_helper'
 require_relative '../../lib/dropdown'
 
 describe Dropdown::MarkdownRenderer do

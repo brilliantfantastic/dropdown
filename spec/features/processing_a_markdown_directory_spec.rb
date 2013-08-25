@@ -1,3 +1,4 @@
+require_relative '../spec_helper'
 require_relative '../../lib/dropdown'
 
 describe 'Processing a directory of markdown files' do
