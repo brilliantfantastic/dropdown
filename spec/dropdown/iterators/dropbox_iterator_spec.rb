@@ -1,7 +1,6 @@
 require_relative '../../spec_helper'
 require_relative '../../support/dummy_dropbox'
 require_relative '../../../lib/dropdown'
-require_relative '../../../lib/dropdown/iterators/dropbox_iterator'
 
 describe Dropdown::Iterators::DropboxIterator do
   describe '.initialize' do
