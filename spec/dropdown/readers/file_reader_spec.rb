@@ -17,4 +17,14 @@ describe Dropdown::Readers::FileReader do
       subject.read(@file.path).should == contents
     end
   end
+
+  describe '#find_html_files' do
+    let(:current_directory) { File.expand_path File.dirname(__FILE__) }
+    let(:source_directory) { File.join current_directory, '../fixtures/processed' }
+
+    it 'returns all of the html files within a directory' do
+      html_files = Dir[File.join(source_directory, '**', '*')]
+      subject.find_html_files(source_directory).length.should == html_files.length
+    end
+  end
 end
