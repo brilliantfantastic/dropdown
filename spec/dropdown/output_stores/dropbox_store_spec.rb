@@ -31,6 +31,14 @@ describe Dropdown::OutputStores::DropboxStore do
       File.exists?(output_file).should be_true
     end
 
+    it 'writes the content to the file name' do
+      filename = 'bar.html'
+      stub_dropbox_put_file access_token, path(filename), html, true
+      subject.save html, filename
+      output_file = stubbed_dropbox_pathname(File.join(output_path, filename))
+      File.readlines(output_file)[0].should == html
+    end
+
     def path(filename)
       File.join(output_path, filename).gsub /^\//, ''
     end
