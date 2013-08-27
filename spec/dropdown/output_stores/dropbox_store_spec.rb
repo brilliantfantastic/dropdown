@@ -17,11 +17,22 @@ describe Dropdown::OutputStores::DropboxStore do
   describe '#save' do
     it 'creates an output directory if it does not exist' do
       filename = 'stuff.html'
-      path = File.join(output_path, filename).gsub /^\//, ''
-      stub_dropbox_put_file access_token, path, html, true
+      stub_dropbox_put_file access_token, path(filename), html, true
 
       subject.save html, filename
       stubbed_dropbox_pathname(subject.path).should exist
+    end
+
+    it 'names the output file the same as the input file' do
+      filename = 'bar.html'
+      stub_dropbox_put_file access_token, path(filename), html, true
+      subject.save html, filename
+      output_file = stubbed_dropbox_pathname(File.join(output_path, filename))
+      File.exists?(output_file).should be_true
+    end
+
+    def path(filename)
+      File.join(output_path, filename).gsub /^\//, ''
     end
   end
 end
