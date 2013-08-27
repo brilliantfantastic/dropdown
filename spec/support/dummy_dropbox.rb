@@ -21,7 +21,7 @@ module DummyDropbox
   def stub_dropbox_metadata(access_token, directory, contents)
     body = { contents: contents }
 
-    FakeWeb.register_uri(:get, "https://api.dropbox.com/1/metadata/auto#{directory}?file_limit=25000&include_deleted=false&list=true",
+    FakeWeb.register_uri(:get, "https://api.dropbox.com/1/metadata/auto/#{directory}?file_limit=25000&include_deleted=false&list=true",
                          :authorization => "Bearer #{access_token}",
                          :status => 200,
                          :body => body.to_json)

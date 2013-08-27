@@ -13,11 +13,11 @@ describe Dropdown::Iterators::DropboxIterator do
     include DummyDropbox
 
     let(:access_token) { 'blah' }
-    let(:dir) { '/Documents/test' }
+    let(:dir) { 'Documents/test' }
     before { Dropdown.configure { |c| c.dropbox_access_token = access_token } }
 
     it 'should iterate over markdown files that end in .md' do
-      path = '/Documents/test/test1.md'
+      path = 'Documents/test/test1.md'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
 
@@ -25,7 +25,7 @@ describe Dropdown::Iterators::DropboxIterator do
     end
 
     it 'should iterate over markdown files that end in .markdown' do
-      path = '/Documents/test/test1.markdown'
+      path = 'Documents/test/test1.markdown'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
 
@@ -33,7 +33,7 @@ describe Dropdown::Iterators::DropboxIterator do
     end
 
     it 'should ignore files that are not markdown files' do
-      path = '/Documents/test/test1.txt'
+      path = 'Documents/test/test1.txt'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
 
@@ -43,7 +43,7 @@ describe Dropdown::Iterators::DropboxIterator do
     it 'should handle an extra slash in the source' do
       directory = dir + "/"
 
-      path = '/Documents/test/test1.markdown'
+      path = 'Documents/test/test1.markdown'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
 
