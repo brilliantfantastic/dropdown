@@ -23,4 +23,21 @@ describe Dropdown::Readers::DropboxReader do
       subject.read(path).should == contents
     end
   end
+
+  describe '#find_html_files' do
+    let(:source_directory) { 'blog' }
+    let(:contents) do
+      [{id_dir: false, path: "#{source_directory}/file1.html"},
+       {id_dir: false, path: "#{source_directory}/file1.txt"},
+       {id_dir: false, path: "#{source_directory}/file2.html"}]
+    end
+
+    before do
+      stub_dropbox_metadata access_token, source_directory, contents
+    end
+
+    it 'returns all of the html files within a directory' do
+      subject.find_html_files(source_directory).length.should == 2
+    end
+  end
 end
