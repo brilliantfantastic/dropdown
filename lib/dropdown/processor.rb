@@ -19,6 +19,14 @@ module Dropdown
       @iterator ||= Iterators::FileIterator.new(source)
     end
 
+    def reader=(value)
+      @reader = value
+    end
+
+    def reader
+      @reader ||= Readers::FileReader.new
+    end
+
     def process
       markdown_iterator.each do |file|
         renderer = renderer_for file
@@ -30,7 +38,7 @@ module Dropdown
 
     def renderer_for(file)
       r = RendererFactory.create(renderer, file)
-      r.reader = Dropdown::Readers::FileReader.new
+      r.reader = reader
       r
     end
   end
