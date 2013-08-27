@@ -27,6 +27,12 @@ module DummyDropbox
                          :body => body.to_json)
   end
 
+  def stub_dropbox_get_file(access_token, path)
+    contents = File.read(stubbed_dropbox_path(path)) if File.exist?(stubbed_dropbox_path(path))
+    FakeWeb.register_uri(:get, "https://api-content.dropbox.com/1/files/auto/#{path}?",
+                        :body => contents)
+  end
+
   def stub_dropbox_put_file(access_token, path, contents, overwrite=false)
     body = {
       size: "#{contents.length / 100}KB",
