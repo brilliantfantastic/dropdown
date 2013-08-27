@@ -1,7 +1,7 @@
 require_relative 'dropdown/dropbox'
 require_relative 'dropdown/processor'
 require_relative 'dropdown/configuration'
-require_relative 'dropdown/output_store'
+require_relative 'dropdown/output_stores'
 require_relative 'dropdown/iterators'
 require_relative 'dropdown/parsers/parser'
 require_relative 'dropdown/parsers/metadata_parser'

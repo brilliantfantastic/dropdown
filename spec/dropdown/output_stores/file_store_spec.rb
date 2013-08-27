@@ -1,7 +1,7 @@
 require 'pathname'
 require 'tmpdir'
-require_relative '../spec_helper'
-require_relative '../../lib/dropdown/output_store'
+require_relative '../../spec_helper'
+require_relative '../../../lib/dropdown/output_stores/file_store'
 
 describe  Dropdown::OutputStore do
   let(:html) { "<p>This is <em>great</em>, yo</p>\n" }
