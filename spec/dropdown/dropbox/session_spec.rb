@@ -1,5 +1,5 @@
-require 'webmock/rspec'
 require_relative '../../spec_helper'
+require_relative '../../support/dummy_dropbox'
 require_relative '../../../lib/dropdown/dropbox/session'
 
 describe Dropdown::Dropbox::Session do
@@ -12,15 +12,13 @@ describe Dropdown::Dropbox::Session do
   end
 
   describe '#access_token' do
+    include DummyDropbox
+
     it 'returns the access token based on the authorize code' do
-      code = "blah"
       access_token = "12345678"
 
-      stub_request(:post, "https://key:secret@api.dropbox.com/1/oauth2/token").
-        with(:body => {"code"=>"#{code}", "grant_type"=>"authorization_code"}).
-        to_return(:status => 200, :body => {access_token: access_token, token_type: "bearer", uid: "12345"}.to_json)
-
-      subject.access_token(code).should == access_token
+      stub_dropbox_token 'key', 'secret', access_token
+      subject.access_token('blah').should == access_token
     end
   end
 end
