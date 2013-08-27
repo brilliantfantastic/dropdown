@@ -1,4 +1,5 @@
 require_relative '../spec_helper'
+require_relative '../support/dummy_dropbox'
 require_relative '../../lib/dropdown'
 
 describe 'Processing a directory of markdown files' do
@@ -14,7 +15,7 @@ describe 'Processing a directory of markdown files' do
 
     it 'generates the html files for the markdown files' do
       subject.source = blog_directory
-      subject.output_store = Dropdown::OutputStore.new(html_directory)
+      subject.output_store = Dropdown::OutputStores::FileStore.new(html_directory)
       subject.renderer = :markdown_renderer
       subject.process
 
@@ -22,18 +23,5 @@ describe 'Processing a directory of markdown files' do
       html_files.length.should be > 0
     end
 
-  end
-
-  context 'for a Dropbox directory' do
-    let(:blog_directory) { '/blog' }
-    let(:html_directory) { '/blog/processed' }
-
-    it 'generates the html files for the markdown files' do
-      subject.source = blog_directory
-      subject.output_store = Dropdown::OutputStore.new(html_directory)
-      subject.markdown_iterator = Dropdown::Iterators::DropboxIterator.new(blog_directory)
-      subject.renderer = :markdown_renderer
-      subject.process
-    end
   end
 end

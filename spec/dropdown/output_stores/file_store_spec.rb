@@ -3,10 +3,10 @@ require 'tmpdir'
 require_relative '../../spec_helper'
 require_relative '../../../lib/dropdown/output_stores/file_store'
 
-describe  Dropdown::OutputStore do
+describe  Dropdown::OutputStores::FileStore do
   let(:html) { "<p>This is <em>great</em>, yo</p>\n" }
   let(:output_path) { File.join(Dir.tmpdir, 'foo') }
-  subject { Dropdown::OutputStore.new output_path }
+  subject { Dropdown::OutputStores::FileStore.new output_path }
 
   describe '#save' do
     after { File.delete subject.path }
