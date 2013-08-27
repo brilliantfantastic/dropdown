@@ -1,4 +1,3 @@
-require 'tempfile'
 require 'dropbox_sdk'
 
 module Dropdown
