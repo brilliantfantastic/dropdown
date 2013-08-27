@@ -16,7 +16,8 @@ describe Dropdown::Processor do
 
     context 'with some files' do
       class FakeRenderer
-        def initialize(file); end
+        attr_accessor :reader
+        def initialize(file_path); end
       end
 
       let(:files) { [double, double] }

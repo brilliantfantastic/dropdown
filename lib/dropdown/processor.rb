@@ -29,7 +29,9 @@ module Dropdown
     private
 
     def renderer_for(file)
-      RendererFactory.create(renderer, file)
+      r = RendererFactory.create(renderer, file)
+      r.reader = Dropdown::Readers::FileReader.new
+      r
     end
   end
 end
