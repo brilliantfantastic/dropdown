@@ -16,18 +16,20 @@ describe Dropdown::Blog do
     end
   end
 
-  describe '#posts' do
-    let(:current_directory) { File.expand_path File.dirname(__FILE__) }
-    let(:source_directory) { File.join current_directory, '../fixtures/processed' }
+  describe 'in a local directory' do
+    describe '#posts' do
+      let(:current_directory) { File.expand_path File.dirname(__FILE__) }
+      let(:source_directory) { File.join current_directory, '../fixtures/processed' }
 
-    it 'is initialized to empty' do
-      Dropdown::Blog.new.posts.should be_empty
-    end
+      it 'is initialized to empty' do
+        Dropdown::Blog.new.posts.should be_empty
+      end
 
-    it 'creates a post for each file in the source' do
-      html_files = Dir[File.join(source_directory, '**', '*')]
-      blog = Dropdown::Blog.new source_directory
-      blog.posts.length.should == html_files.length
+      it 'creates a post for each file in the source' do
+        html_files = Dir[File.join(source_directory, '**', '*')]
+        blog = Dropdown::Blog.new source_directory
+        blog.posts.length.should == html_files.length
+      end
     end
   end
 end

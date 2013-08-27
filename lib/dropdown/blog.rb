@@ -1,10 +1,11 @@
 module Dropdown
   class Blog
     attr_accessor :name, :source
-    attr_reader :posts
+    attr_reader :reader, :posts
 
-    def initialize(source=nil)
+    def initialize(source=nil, reader=Dropdown::Readers::FileReader.new)
       @source = source
+      @reader = reader
       @posts = []
       collect
     end
@@ -13,7 +14,7 @@ module Dropdown
 
     def collect
       unless @source.nil?
-        Dir.glob("#{@source}/**/*.html") do |html_file|
+        @reader.find_html_files(@source).each do |html_file|
           @posts << Post.new(html_file)
         end
       end
