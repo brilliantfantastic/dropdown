@@ -1,8 +1,13 @@
 require 'fakeweb'
 
 module DummyDropbox
+  class << self
+    attr_accessor :dropbox_base_path
+  end
+
   def self.included(base)
     FakeWeb.allow_net_connect = false
+    @dropbox_base_path = File.join Dir.tmpdir, 'dropbox'
   end
 
   def stub_dropbox_token(key, secret, access_token, uid="12345")
@@ -34,5 +39,19 @@ module DummyDropbox
                          :status => 200,
                          :content_type => "application/octet-stream",
                          :body => body.to_json)
+    FileUtils.mkdir_p(stubbed_dropbox_pathname(path).dirname)
+    File.open(stubbed_dropbox_path(path), 'w+') { |f| f.write contents }
+  end
+
+  def stubbed_dropbox_pathname(path)
+    Pathname.new stubbed_dropbox_path(path)
+  end
+
+  def stubbed_dropbox_path(path)
+    File.join DummyDropbox.dropbox_base_path, path
+  end
+
+  def remove_stubbed_dropbox_files
+    FileUtils.rm_rf DummyDropbox.dropbox_base_path
   end
 end
