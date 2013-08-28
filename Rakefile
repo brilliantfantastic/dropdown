@@ -12,8 +12,8 @@ task :process, :source_directory do |t, args|
   require_relative 'lib/dropdown'
   processor = Dropdown::Processor.new
   processor.source = args[:source_directory]
-  destination = File.join(processor.source, 'html')
-  processor.output_store = Dropdown::OutputStore.new destination
+  processor.destination = File.join(processor.source, 'html')
+  processor.storage = args[:storage] || :dropbox
   processor.renderer = :markdown_renderer
   processor.process
 end
