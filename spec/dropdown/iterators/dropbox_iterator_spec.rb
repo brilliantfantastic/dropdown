@@ -4,7 +4,7 @@ require_relative '../../../lib/dropdown'
 
 describe Dropdown::Iterators::DropboxIterator do
   describe '.initialize' do
-    it 'should require a source path' do
+    it 'requires a source path' do
       expect{ Dropdown::Iterators::DropboxIterator.new(nil) }.to raise_error ArgumentError
     end
   end
@@ -16,7 +16,7 @@ describe Dropdown::Iterators::DropboxIterator do
     let(:dir) { 'Documents/test' }
     before { Dropdown.configure { |c| c.dropbox_access_token = access_token } }
 
-    it 'should iterate over markdown files that end in .md' do
+    it 'iterates over markdown files that end in .md' do
       path = 'Documents/test/test1.md'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
@@ -24,7 +24,7 @@ describe Dropdown::Iterators::DropboxIterator do
       expect{ |f| Dropdown::Iterators::DropboxIterator.new(dir).each(&f) }.to yield_with_args path
     end
 
-    it 'should iterate over markdown files that end in .markdown' do
+    it 'iterates over markdown files that end in .markdown' do
       path = 'Documents/test/test1.markdown'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
@@ -32,7 +32,7 @@ describe Dropdown::Iterators::DropboxIterator do
       expect{ |f| Dropdown::Iterators::DropboxIterator.new(dir).each(&f) }.to yield_with_args path
     end
 
-    it 'should ignore files that are not markdown files' do
+    it 'ignores files that are not markdown files' do
       path = 'Documents/test/test1.txt'
       contents = [{is_dir: false, path: path}]
       stub_dropbox_metadata access_token, dir, contents
@@ -40,7 +40,7 @@ describe Dropdown::Iterators::DropboxIterator do
       expect{ |f| Dropdown::Iterators::DropboxIterator.new(dir).each(&f) }.not_to yield_control
     end
 
-    it 'should handle an extra slash in the source' do
+    it 'handles an extra slash in the source' do
       directory = dir + "/"
 
       path = 'Documents/test/test1.markdown'
