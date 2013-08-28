@@ -1,15 +1,11 @@
-require_relative '../errors'
-require_relative '../constants'
-
 module Dropdown
   module Parsers
     module Parser
-      attr_accessor :file
+      attr_accessor :content
 
-      def initialize(file)
-        raise ArgumentError if file.nil?
-        raise Dropdown::FileTypeError if !Dropdown::HTML_EXTENSIONS.include? File.extname(file)
-        @file = file
+      def initialize(content)
+        raise ArgumentError if content.nil?
+        @content = content
       end
     end
   end
