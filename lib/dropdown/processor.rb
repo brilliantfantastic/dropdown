@@ -3,11 +3,12 @@ require_relative 'renderer_factory'
 module Dropdown
   class Processor
     attr_accessor :source,
+                  :destination,
                   :storage,
                   :reader,
                   :markdown_iterator,
-                  :renderer,
-                  :output_store
+                  :output_store,
+                  :renderer
 
     def initialize
       @renderer = Dropdown.configuration.renderer
@@ -17,6 +18,7 @@ module Dropdown
       @storage = value
       self.reader = Dropdown::Readers::ReaderFactory.create(value)
       self.markdown_iterator = Dropdown::Iterators::IteratorFactory.create(value, self.source)
+      self.output_store = Dropdown::OutputStores::OutputStoreFactory.create(value, self.destination)
     end
 
     def process

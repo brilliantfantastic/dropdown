@@ -28,15 +28,10 @@ describe Dropdown::Processor do
         subject.markdown_iterator.should be_a Dropdown::Iterators::DropboxIterator
       end
 
-      it 'creates the appropriate instance of the output store'
+      it 'creates the appropriate instance of the output store' do
+        subject.output_store.should be_a Dropdown::OutputStores::DropboxStore
+      end
     end
-
-    # describe '#destination' do
-    #   it 'sets the destination of the output store' do
-    #     subject.destination = 'blah'
-    #     subject.output_store.path.should == 'blah'
-    #   end
-    # end
 
     context 'with some files' do
       class FakeRenderer
@@ -70,14 +65,6 @@ describe Dropdown::Processor do
 
         store.should_receive(:save).exactly(files.count).times
         subject.process
-      end
-    end
-
-    describe '.markdown_iterator' do
-      let(:source) { double(:sub => '') }
-      it 'defaults to a file iterator' do
-        subject.source = source
-        subject.markdown_iterator.should be_a Dropdown::Iterators::FileIterator
       end
     end
   end
