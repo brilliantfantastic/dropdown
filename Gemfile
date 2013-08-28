@@ -11,6 +11,5 @@ gem 'dropbox-sdk'
 
 group :development, :test do
   gem 'rspec'
-  gem 'webmock', '~> 1.13.0'
   gem 'fakeweb'
 end
