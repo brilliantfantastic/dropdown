@@ -5,6 +5,7 @@ module Dropdown
     attr_accessor :source,
                   :storage,
                   :reader,
+                  :markdown_iterator,
                   :renderer,
                   :output_store
 
@@ -16,14 +17,6 @@ module Dropdown
       @storage = value
       self.reader = Dropdown::Readers::ReaderFactory.create(value)
       self.markdown_iterator = Dropdown::Iterators::IteratorFactory.create(value, self.source)
-    end
-
-    def markdown_iterator=(value)
-      @iterator = value
-    end
-
-    def markdown_iterator
-      @iterator ||= Iterators::FileIterator.new(source)
     end
 
     def process
