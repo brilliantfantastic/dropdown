@@ -4,6 +4,7 @@ module Dropdown
   class Processor
     attr_accessor :source,
                   :storage,
+                  :reader,
                   :renderer,
                   :output_store
 
@@ -22,14 +23,6 @@ module Dropdown
 
     def markdown_iterator
       @iterator ||= Iterators::FileIterator.new(source)
-    end
-
-    def reader=(value)
-      @reader = value
-    end
-
-    def reader
-      @reader ||= Readers::FileReader.new
     end
 
     def process

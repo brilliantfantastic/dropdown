@@ -16,6 +16,7 @@ describe 'Processing a directory of markdown files' do
     it 'generates the html files for the markdown files' do
       subject.source = blog_directory
       subject.output_store = Dropdown::OutputStores::FileStore.new(html_directory)
+      subject.reader = Dropdown::Readers::FileReader.new
       subject.renderer = :markdown_renderer
       subject.process
 
