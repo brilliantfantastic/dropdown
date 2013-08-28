@@ -1,22 +1,24 @@
 require_relative 'renderer_factory'
-require_relative 'iterators/file_iterator'
 
 module Dropdown
   class Processor
     attr_accessor :source,
-                  :renderer,
-                  :output_store
+                  :destination,
+                  :storage,
+                  :reader,
+                  :markdown_iterator,
+                  :output_store,
+                  :renderer
 
     def initialize
       @renderer = Dropdown.configuration.renderer
     end
 
-    def markdown_iterator=(value)
-      @iterator = value
-    end
-
-    def markdown_iterator
-      @iterator ||= Iterators::FileIterator.new(source)
+    def storage=(value)
+      @storage = value
+      self.reader = Dropdown::Readers::ReaderFactory.create(value)
+      self.markdown_iterator = Dropdown::Iterators::IteratorFactory.create(value, self.source)
+      self.output_store = Dropdown::OutputStores::OutputStoreFactory.create(value, self.destination)
     end
 
     def process
@@ -29,7 +31,9 @@ module Dropdown
     private
 
     def renderer_for(file)
-      RendererFactory.create(renderer, file)
+      r = RendererFactory.create(renderer, file)
+      r.reader = reader
+      r
     end
   end
 end

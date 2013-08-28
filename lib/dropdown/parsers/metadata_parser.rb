@@ -8,13 +8,13 @@ module Dropdown
 
       attr_accessor :headers
 
-      def initialize(file)
+      def initialize(content)
         super
         @headers = {}
       end
 
       def parse
-        doc = Nokogiri::HTML.parse(@file.readlines.join)
+        doc = Nokogiri::HTML.parse(@content)
         doc.xpath('//comment()').each { |comment| extract_header(comment.content) }
       end
 
