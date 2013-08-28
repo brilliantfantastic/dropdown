@@ -1,4 +1,3 @@
-require 'tempfile'
 require_relative '../../spec_helper'
 require_relative '../../../lib/dropdown/parsers/parser'
 
@@ -8,35 +7,20 @@ end
 
 describe Dropdown::Parsers::Parser do
   context 'raising errors' do
-    it 'requires a file' do
+    it 'requires some content' do
       expect {
           MyParser.new(nil)
         }.to raise_error ArgumentError
     end
-
-    it 'requires source file to be .html' do
-      file = Tempfile.new ['test', '.rtf']
-
-      expect {
-        MyParser.new(file)
-      }.to raise_error Dropdown::FileTypeError
-
-      %w(.html).each do |ext|
-        file = Tempfile.new ['test', ext]
-        expect {
-          MyParser.new(file)
-        }.to_not raise_error Dropdown::FileTypeError
-      end
-    end
   end
 
   context 'setting instance variables' do
-    let(:file) { Tempfile.new ['text', '.html'] }
+    let(:content) { "Hello world" }
 
-    subject { MyParser.new(file) }
+    subject { MyParser.new(content) }
 
-    it 'sets the file' do
-      subject.file.should == file
+    it 'sets the content' do
+      subject.content.should == content
     end
   end
 end
