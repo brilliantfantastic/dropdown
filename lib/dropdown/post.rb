@@ -1,6 +1,6 @@
 module Dropdown
   class Post
-    attr_reader :source
+    attr_reader :source, :reader
 
     def title
       metadata[:title]
@@ -15,34 +15,34 @@ module Dropdown
     end
 
     def body
-      file.readlines.join
+      content
     end
 
     def excerpt
       unless @excerpt
-        extractor = Dropdown::Parsers::ExcerptExtractor.new(file)
+        extractor = Dropdown::Parsers::ExcerptExtractor.new(content)
         @excerpt = extractor.extract
       end
       @excerpt
     end
 
-    def initialize(source)
+    def initialize(source, reader)
       @source = source
+      @reader = reader
     end
 
     private
 
     def metadata
       unless @metadata
-        @metadata = Dropdown::Parsers::MetadataParser.new(file)
+        @metadata = Dropdown::Parsers::MetadataParser.new(content)
         @metadata.parse
       end
       @metadata.headers
     end
 
-    def file
-      @file = File.new(@source, 'r') unless @file
-      @file
+    def content
+      @content ||= reader.read(@source)
     end
   end
 end

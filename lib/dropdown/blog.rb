@@ -15,7 +15,7 @@ module Dropdown
     def collect
       unless @source.nil?
         @reader.find_html_files(@source).each do |html_file|
-          @posts << Post.new(html_file)
+          @posts << Post.new(html_file, reader)
         end
       end
     end
