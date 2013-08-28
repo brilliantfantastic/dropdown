@@ -33,6 +33,7 @@ describe 'Processing a directory of markdown files' do
     let(:html_directory) { 'blog/processed' }
 
     before { Dropdown.configure { |c| c.dropbox_access_token = access_token } }
+    after { remove_stubbed_dropbox_files }
 
     it 'generates the html files for the markdown files' do
       markdown_file = "#{blog_directory}/my-trip-to-africa.md"
