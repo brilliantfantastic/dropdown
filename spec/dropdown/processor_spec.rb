@@ -15,12 +15,19 @@ describe Dropdown::Processor do
     end
 
     describe '#storage' do
-      it 'creates the appropriate instance of the reader' do
+      before do
+        subject.source = 'blah'
         subject.storage = :dropbox
+      end
+
+      it 'creates the appropriate instance of the reader' do
         subject.reader.should be_a Dropdown::Readers::DropboxReader
       end
 
-      it 'creates the appropriate instance of the iterator'
+      it 'creates the appropriate instance of the iterator' do
+        subject.markdown_iterator.should be_a Dropdown::Iterators::DropboxIterator
+      end
+
       it 'creates the appropriate instance of the output store'
     end
 

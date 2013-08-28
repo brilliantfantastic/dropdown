@@ -15,6 +15,7 @@ module Dropdown
     def storage=(value)
       @storage = value
       self.reader = Dropdown::Readers::ReaderFactory.create(value)
+      self.markdown_iterator = Dropdown::Iterators::IteratorFactory.create(value, self.source)
     end
 
     def markdown_iterator=(value)
