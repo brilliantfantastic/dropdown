@@ -14,6 +14,23 @@ describe Dropdown::Processor do
       subject.process
     end
 
+    describe '#storage' do
+      it 'creates the appropriate instance of the reader' do
+        subject.storage = :dropbox
+        subject.reader.should be_a Dropdown::Readers::DropboxReader
+      end
+
+      it 'creates the appropriate instance of the iterator'
+      it 'creates the appropriate instance of the output store'
+    end
+
+    # describe '#destination' do
+    #   it 'sets the destination of the output store' do
+    #     subject.destination = 'blah'
+    #     subject.output_store.path.should == 'blah'
+    #   end
+    # end
+
     context 'with some files' do
       class FakeRenderer
         attr_accessor :reader
