@@ -40,4 +40,27 @@ describe Dropdown::Post do
       subject.excerpt.should == results
     end
   end
+
+  describe 'for a Dropbox file' do
+    include DummyDropbox
+
+    let(:access_token) { 'blah' }
+    let(:processed_file) { 'blog/stuff.html' }
+    let(:contents) { "<p>Hello <span class='test'>world</span></p>" }
+
+    subject { Dropdown::Post.new(processed_file, Dropdown::Readers::DropboxReader.new) }
+
+    before do
+      Dropdown.configure { |c| c.dropbox_access_token = access_token }
+      stub_dropbox_put_file access_token, processed_file, contents, true
+    end
+    after { remove_stubbed_dropbox_files }
+
+    describe '#body' do
+      it 'returns the full html' do
+        stub_dropbox_get_file access_token, processed_file
+        subject.body.should == contents
+      end
+    end
+  end
 end
