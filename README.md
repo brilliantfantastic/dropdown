@@ -7,6 +7,27 @@ Dropdown
 
 Blog engine that parses Markdown files stored in Dropbox for a static blog engine.
 
+Installation
+=============
+
+Add this line to your application's Gemfile:
+
+```sh
+gem 'dropdown'
+```
+
+And then execute:
+
+```sh
+$ bundle
+```
+
+Or install it yourself as:
+
+```sh
+$ gem install dropdown
+```
+
 Getting Started with Dropbox storage
 ====================================
 
