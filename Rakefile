@@ -9,8 +9,11 @@ task :test do
 end
 
 desc 'Process the markdown files in a directory'
-task :process, :source_directory do |t, args|
+task :process, [:source_directory] => :dotenv do |t, args|
   require_relative 'lib/dropdown'
+  Dropdown.configure do |c|
+    c.dropbox_access_token = ENV['DROPBOX_ACCESS_TOKEN']
+  end
   processor = Dropdown::Processor.new
   processor.source = args[:source_directory]
   processor.destination = File.join(processor.source, 'html')
