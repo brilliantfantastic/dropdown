@@ -4,6 +4,7 @@ require_relative '../../../lib/dropdown/parsers/excerpt_extractor'
 
 describe Dropdown::Parsers::ExcerptExtractor do
   describe '#extract' do
+    # TODO: This needs a better test
     it 'extracts the first 120 characters' do
       subject = Dropdown::Parsers::ExcerptExtractor.new('Hello world')
       subject.extract.should == 'Hello world'

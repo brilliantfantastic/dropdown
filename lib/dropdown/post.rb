@@ -14,6 +14,10 @@ module Dropdown
       Date.parse metadata[:date]
     end
 
+    # TODO: def slug
+    # TODO: def to_param
+    # TODO: def find_by_slug
+
     def body
       content
     end
